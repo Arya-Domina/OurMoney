@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Совместный бюджет</string>
+    <string name="list_friends">Список\n друзей</string>
+    <string name="search_friends">Найти\n друзей</string>
+    <string name="calculation">Расчёт\n</string>
+    <string name="add_item">Добавить</string>
+    <string name="my_items">Мои товары</string>
+    <string name="add">Добавить</string>
+
+    <string name="add_item_title">Добавить товар</string>
+    <string name="goods">Товар</string>
+    <string name="goods_name">Наименование товара</string>
+    <string name="purchase_date">Дата покупки</string>
+    <string name="product_price">Цена товара</string>
+    <string name="comment">Комментарий</string>
+
+    <string-array name="tabs">
+        <item>История</item>
+        <item>Актуальные покупки</item>
+        <!--<item>Показания счётчиков</item>-->
+        <item>Друзья</item>
+        <item>Расчитать</item>
+    </string-array>
+</resources>
