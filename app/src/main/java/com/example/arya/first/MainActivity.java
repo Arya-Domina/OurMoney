@@ -4,11 +4,11 @@ import android.app.TabActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TabHost;
-import android.widget.TextView;
 
 public class MainActivity extends TabActivity {
 
     private TabHost tabHost;
+    private final String TAG_HISTORY = "History", TAG_MY_ITEMS = "My items", TAG_FRIENDS = "Friends", TAG_CALCULATION = "Calculation";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,15 +20,27 @@ public class MainActivity extends TabActivity {
         tabHost = getTabHost();
         TabHost.TabSpec tabSpec;
 
-        tabSpec = tabHost.newTabSpec("tag1");
-        tabSpec.setIndicator("Taaab1!");
+        tabSpec = tabHost.newTabSpec(TAG_HISTORY);
+        tabSpec.setIndicator(null, getResources().getDrawable(R.drawable.tab_icon_selector_history));
         tabSpec.setContent(TabFactory);
         tabHost.addTab(tabSpec);
 
-        tabSpec = tabHost.newTabSpec("tag2");
-        tabSpec.setIndicator(null, getResources().getDrawable(R.drawable.tab_icon_selector));
+        tabSpec = tabHost.newTabSpec(TAG_MY_ITEMS);
+        tabSpec.setIndicator(null, getResources().getDrawable(R.drawable.tab_icon_selector_history));
         tabSpec.setContent(TabFactory);
         tabHost.addTab(tabSpec);
+
+        tabSpec = tabHost.newTabSpec(TAG_FRIENDS);
+        tabSpec.setIndicator(null, getResources().getDrawable(R.drawable.tab_icon_selector_history));
+        tabSpec.setContent(TabFactory);
+        tabHost.addTab(tabSpec);
+
+        tabSpec = tabHost.newTabSpec(TAG_CALCULATION);
+        tabSpec.setIndicator(null, getResources().getDrawable(R.drawable.tab_icon_selector_history));
+        tabSpec.setContent(TabFactory);
+        tabHost.addTab(tabSpec);
+
+        tabHost.setCurrentTabByTag(TAG_MY_ITEMS);
 /*
         tabSpec = tabHost.newTabSpec("tag3");
         tabSpec.setIndicator("Taaab3!");
@@ -37,7 +49,6 @@ public class MainActivity extends TabActivity {
         tabSpec.setContent(R.id.tab_text3);
         tabHost.addTab(tabSpec);
 
-        tabHost.setCurrentTabByTag("tag2");
 
         tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             public void onTabChanged(String tabId) {
@@ -49,12 +60,17 @@ public class MainActivity extends TabActivity {
     TabHost.TabContentFactory TabFactory = new TabHost.TabContentFactory() {
         @Override
         public View createTabContent(String tag) {
-            if (tag == "tag1") {
-                return getLayoutInflater().inflate(R.layout.tab, null);
-            } else if (tag == "tag2") {
-                TextView textView = new TextView(MainActivity.this);
-                textView.setText("omnomnom");
-                return textView;
+            if (tag == TAG_HISTORY) {
+//                TextView textView = new TextView(MainActivity.this);
+//                textView.setText("omnomnom");
+//                return textView;
+                return getLayoutInflater().inflate(R.layout.activity_history, null);
+            } else if (tag == TAG_MY_ITEMS) {
+                return getLayoutInflater().inflate(R.layout.activity_my_items, null);
+            } else if (tag == TAG_FRIENDS) {
+                return getLayoutInflater().inflate(R.layout.activity_friends, null);
+            }else if (tag == TAG_CALCULATION) {
+                return getLayoutInflater().inflate(R.layout.activity_calculation, null);
             }
             return null;
         }
