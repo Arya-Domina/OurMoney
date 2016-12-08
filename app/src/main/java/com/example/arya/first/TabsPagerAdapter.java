@@ -27,8 +27,5 @@ public class TabsPagerAdapter extends FragmentPagerAdapter{
     @Override
     public CharSequence getPageTitle(int position) {
         return "TAB" + (position+1);
-//        titleTabs = R.array.tabs;
-//        String[] names = getResources().getStringArray(R.array.tabs);
-//        return names[position];
     }
 }

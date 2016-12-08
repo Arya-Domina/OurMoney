@@ -31,40 +31,24 @@ public class PageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_page_layout, container, false);
         TextView text = (TextView)rootView.findViewById(R.id.page_number_label);
-//        View fragment = rootView.findViewById(R.id.fragment_history);
-
-        Fragment history = getFragmentManager().findFragmentById(R.id.fg_history);
-        List<Fragment> frs = getFragmentManager().getFragments();
-        for (int i = 0; i < frs.size(); i++) {
-            frs.get(i);
-        }
-//        ((Button)history.getView().findViewById(R.id.btn_frg_history)).setText("button1");
-
-        Fragment myItems = getFragmentManager().findFragmentById(R.id.fg_my_items);
-//        ((Button)myItems.getView().findViewById(R.id.btn_frg_my_items)).setText("button2");
-
 
         switch (getArguments().getInt(ARG_PAGE_NUMBER)) {
-            case 0:
-                text.setText(String.format("This is 0 page?"));
-                break;
             case 1:
-                text.setText(String.format("This is one page?"));
+                text.setText("This is one page?");
                 break;
             case 2:
-                text.setText(String.format("This is second page?"));
+                text.setText("This is second page?");
                 break;
             case 3:
-                text.setText(String.format("This is tree page?"));
+                text.setText("This is tree page?");
                 break;
             case 4:
-                text.setText(String.format("This is for page?"));
+                text.setText("This is for page?");
                 break;
             default:
-                text.setText(String.format("This is SPARTAAA!!!!1111"));
+                text.setText("This is SPARTAAA!!!!1111");
                 break;
         }
-
 
 //        int page = getArguments().getInt(ARG_PAGE_NUMBER, -1);
 //        text.setText(String.format("Pageeee %d", page));
