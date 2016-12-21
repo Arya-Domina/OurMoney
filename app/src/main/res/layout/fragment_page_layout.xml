@@ -15,29 +15,13 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <!--<fragment-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:name="com.example.arya.first.MyItemsFragment"-->
-        <!--tools:layout="@layout/fragment_my_items"-->
-        <!--android:id="@+id/fg_my_items"-->
-        <!--android:layout_marginTop="135dp"-->
-        <!--android:layout_below="@+id/page_number_label"-->
-        <!--android:layout_alignParentLeft="true"-->
-        <!--android:layout_alignParentStart="true" />-->
-
-    <!--<fragment-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:name="com.example.arya.first.HistoryFragment"-->
-        <!--tools:layout="@layout/fragment_history"-->
-        <!--android:id="@+id/fg_history"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_alignParentLeft="true"-->
-        <!--android:layout_alignParentStart="true" />-->
-    <!--<RelativeLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:id="@+id/page_layout"></RelativeLayout>-->
+    <FrameLayout
+        android:id="@+id/fragment_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/page_number_label"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+    </FrameLayout>
 
 </RelativeLayout>
