@@ -13,6 +13,10 @@
     <string name="purchase_date">Дата покупки</string>
     <string name="product_price">Цена товара</string>
     <string name="comment">Комментарий</string>
+    <string name="price">Цена</string>
+    <string name="name_goods">Наименование</string>
+    <string name="date">Дата</string>
+    <string name="login">Войти</string>
 
     <string-array name="tabs">
         <item>История</item>
