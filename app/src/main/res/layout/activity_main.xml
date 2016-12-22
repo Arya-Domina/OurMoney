@@ -30,5 +30,10 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/table_goods"
+        android:layout_below="@+id/button"></TableLayout>
 
 </RelativeLayout>

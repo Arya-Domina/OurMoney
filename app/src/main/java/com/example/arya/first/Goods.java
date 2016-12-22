@@ -4,15 +4,15 @@ package com.example.arya.first;
 import java.util.Date;
 
 public class Goods {
-    private Date date;
+    private long date;
     private String name;
     private float price;
 
-    public Date getDate() {
+    public long getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(long date) {
         this.date = date;
     }
 
