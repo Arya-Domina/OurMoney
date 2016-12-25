@@ -7,14 +7,12 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.util.Log;
 
 public class TabsPagerAdapter extends FragmentStatePagerAdapter{
-//    private Resources resources;
+
     Fragment[] fragments = {new HistoryFragment(), new MyItemsFragment(), new MyFriendsFragment(), new CheckFragment()};
 
     public TabsPagerAdapter(FragmentManager fm) {
         super(fm);
     }
-
-    private String[] titleTabs;
 
     @Override
     public Fragment getItem(int position) {

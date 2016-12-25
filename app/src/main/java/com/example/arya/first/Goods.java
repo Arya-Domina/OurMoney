@@ -1,8 +1,6 @@
 package com.example.arya.first;
 
 
-import java.util.Date;
-
 public class Goods {
     private long date;
     private String name;

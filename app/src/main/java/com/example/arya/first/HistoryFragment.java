@@ -37,14 +37,16 @@ public class HistoryFragment extends Fragment{
         for (int i = 0; i < goods.length; i++) {
             goods[i] = new Goods();
         }
+        Date date = new Date(System.currentTimeMillis());
         for (int i = 0; i < 22; i+=3) {
-            goods[i].setDate(System.currentTimeMillis());
+            date.setDate(date.getDate()-1);
+            goods[i].setDate(date.getTime());
             goods[i].setName("Tool");
             goods[i].setPrice(152);
-            goods[i+1].setDate(System.currentTimeMillis());
+            goods[i+1].setDate(date.getTime());
             goods[i+1].setName("Cookie");
             goods[i+1].setPrice(17);
-            goods[i+2].setDate(System.currentTimeMillis());
+            goods[i+2].setDate(date.getTime());
             goods[i+2].setName("Milk");
             goods[i+2].setPrice(56);
         }
@@ -64,8 +66,9 @@ public class HistoryFragment extends Fragment{
 
         TableRow tableRow = (TableRow)inflater.inflate(R.layout.table_row, null);
         TextView textView = (TextView) tableRow.getChildAt(0);
-        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yy", Locale.ROOT);
-        textView.setText(formatter.format(new Date(date)));
+//        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yy", Locale.ROOT);
+//        textView.setText(formatter.format(new Date(date)));
+        textView.setText(new SimpleDateFormat("dd.MM.yy", Locale.ROOT).format(new Date(date)));
         textView.setBackgroundResource(color);
         textView = (TextView) tableRow.getChildAt(1);
         textView.setText(name);

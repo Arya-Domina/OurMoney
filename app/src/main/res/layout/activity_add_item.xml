@@ -15,43 +15,72 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/goods"/>
-            <EditText
+                android:textSize="18sp"
+                android:textColor="#000"
+                android:text="@string/purchase_date"
+                android:layout_margin="3dp"/>
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/edit_text_name_goods"
-                android:hint="@string/goods_name"/>
+                android:text="@string/purchase_date"
+                android:id="@+id/text_date"
+                android:layout_margin="3dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/purchase_date"/>
+                android:textSize="18sp"
+                android:textColor="#000"
+                android:text="@string/goods"
+                android:layout_marginTop="25dp"
+                android:layout_marginLeft="3dp"/>
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/edit_text_purchase_date"
-                android:inputType="date" />
+                android:id="@+id/text_name"
+                android:hint="@string/goods_name"
+                android:layout_marginLeft="3dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/product_price"/>
+                android:textSize="18sp"
+                android:textColor="#000"
+                android:text="@string/product_price"
+                android:layout_marginTop="25dp"
+                android:layout_marginLeft="3dp"/>
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/edit_text_product_price"
-                android:inputType="number"
-                android:hint="@string/product_price" />
+                android:id="@+id/text_price"
+                android:inputType="numberDecimal"
+                android:hint="0.00"
+                android:layout_marginLeft="3dp" />
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="@string/comment"/>-->
+            <!--<EditText-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:id="@+id/edit_text_comment"/>-->
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/comment"/>
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/edit_text_comment"/>
+                android:textSize="18sp"
+                android:textColor="#000"
+                android:text="Кто из друзей должен оплатить:"
+                android:layout_marginTop="25dp"
+                android:layout_marginLeft="3dp"/>
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/friends"
+                android:orientation="vertical"
+                android:layout_marginLeft="3dp"/>
         </LinearLayout>
 
     </ScrollView>
@@ -61,6 +90,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/button_add_item"
         android:text="@string/add_item"
-        android:layout_gravity="bottom|center_horizontal"/>
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="15pt"/>
 
 </FrameLayout>
