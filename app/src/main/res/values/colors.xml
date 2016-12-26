@@ -6,5 +6,6 @@
     <color name="tableHeadBackground">#999</color>
     <color name="unevenRowBackground">#EEE</color>
     <color name="evenRowBackground">#CCC</color>
+    <color name="black">#000</color>
 
 </resources>
