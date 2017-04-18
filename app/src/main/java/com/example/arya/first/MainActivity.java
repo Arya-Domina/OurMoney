@@ -1,23 +1,15 @@
 package com.example.arya.first;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
-import java.io.IOException;
 import java.util.concurrent.Exchanger;
 
-import okhttp3.Call;
-import okhttp3.Callback;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Request request;
+                /*Request request;
                 RequestBody body = RequestBody.create(JSON, json);
                 request = new Request.Builder().url("http://192.168.43.52:9910").post(body).build();
                 client.newCall(request).enqueue(new Callback() {
@@ -74,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
                     }
-                });
+                });**/
             }
         });
 

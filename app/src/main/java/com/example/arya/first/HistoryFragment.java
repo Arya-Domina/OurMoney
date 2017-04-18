@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -26,7 +25,6 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class HistoryFragment extends Fragment{
@@ -36,8 +34,9 @@ public class HistoryFragment extends Fragment{
     GsonBuilder builder = new GsonBuilder();
     Gson gson = builder.create();
 //    OkHttpClient client;
-    Exchanger<String> exchanger;
+    Exchanger<String> exchanger = new Exchanger<>();
     String json = "";
+    String url = "http://192.168.43.165:9910/resource?";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,9 +48,11 @@ public class HistoryFragment extends Fragment{
         View rootView = inflater.inflate(R.layout.fragment_history, container, false);
         this.inflater = inflater;
 
+        int id = 0;
+        url += "id=" + id;
         OkHttpClient client = new OkHttpClient();
-        exchanger = new Exchanger<>();
-        Request request  = new Request.Builder().url("http://192.168.43.52:9910").build();
+//        exchanger = new Exchanger<>();
+        Request request  = new Request.Builder().url(url).build();
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -63,20 +64,21 @@ public class HistoryFragment extends Fragment{
                     throw new IOException("Unexpected code " + response);
                 } else {
                     try {
-                        json = exchanger.exchange(response.body().string());
+                        String srt = response.body().string();
+
+                        //json = exchanger.exchange(response.body().string());
+                        Log.v("onResponse", srt);
+
+                        json = exchanger.exchange(srt);
                     } catch (Exception e) {
-                        e.printStackTrace();
+//                        e.printStackTrace();
                     }
                 }
             }
         });
+        String string = json;
         ArrayList<Goods> gsonGoods = gson.fromJson(json, ArrayList.class);
         goods = new ArrayList<>();
-
-//        goods = new Goods[24];
-//        for (int i = 0; i < goods.length; i++) {
-//            goods[i] = new Goods();
-//        }
         Date date = new Date(System.currentTimeMillis());
         for (int i = 0; i < 22; i+=3) {
             date.setDate(date.getDate()-1);
@@ -93,6 +95,7 @@ public class HistoryFragment extends Fragment{
             goods.get(i+2).setName("Milk");
             goods.get(i+2).setPrice(56);
         }
+        String st = gson.toJson(goods);
 
         TableLayout tableLayout = (TableLayout)rootView.findViewById(R.id.table_goods_history);
         for (int i = 0; i < goods.size(); i++) {
@@ -102,6 +105,7 @@ public class HistoryFragment extends Fragment{
                     goods.get(i).getPrice(),
                     i % 2 == 0 ? R.color.unevenRowBackground : R.color.evenRowBackground));
         }
+        Log.v("Main", json);
 
         return rootView;
     }

@@ -12,15 +12,10 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.Exchanger;
 
-import okhttp3.Call;
-import okhttp3.Callback;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 
 public class MyFriendsFragment extends Fragment {
@@ -39,25 +34,25 @@ public class MyFriendsFragment extends Fragment {
 
         OkHttpClient client = new OkHttpClient();
         exchanger = new Exchanger<>();
-        Request request  = new Request.Builder().url("http://192.168.43.52:9910").build();
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
-            }
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                if (!response.isSuccessful()) {
-                    throw new IOException("Unexpected code " + response);
-                } else {
-                    try {
-                        json = exchanger.exchange(response.body().string());
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
+//        Request request  = new Request.Builder().url("http://192.168.43.52:9910").build();
+//        client.newCall(request).enqueue(new Callback() {
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//                e.printStackTrace();
+//            }
+//            @Override
+//            public void onResponse(Call call, Response response) throws IOException {
+//                if (!response.isSuccessful()) {
+//                    throw new IOException("Unexpected code " + response);
+//                } else {
+//                    try {
+//                        json = exchanger.exchange(response.body().string());
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//        });
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
         ArrayList<User> gsonUsers = gson.fromJson(json, ArrayList.class);

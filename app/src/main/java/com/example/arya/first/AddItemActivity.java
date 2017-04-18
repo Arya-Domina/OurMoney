@@ -80,25 +80,25 @@ public class AddItemActivity extends AppCompatActivity {
             }
         });
 
-        Request requestUsers = new Request.Builder().url("http://192.168.43.52:9910").build();
-        client.newCall(requestUsers).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
-            }
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                if (!response.isSuccessful()) {
-                    throw new IOException("Unexpected code " + response);
-                } else {
-                    try {
-                        stringRequestUsers = exchanger.exchange(response.body().string());
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
+//        Request requestUsers = new Request.Builder().url("http://192.168.43.52:9910").build();
+//        client.newCall(requestUsers).enqueue(new Callback() {
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//                e.printStackTrace();
+//            }
+//            @Override
+//            public void onResponse(Call call, Response response) throws IOException {
+//                if (!response.isSuccessful()) {
+//                    throw new IOException("Unexpected code " + response);
+//                } else {
+//                    try {
+//                        stringRequestUsers = exchanger.exchange(response.body().string());
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//        });
         gsonUsers = gson.fromJson(stringRequestUsers, ArrayList.class);
         users = new ArrayList<>();
         for (int i = 0; i < 3; i++) {

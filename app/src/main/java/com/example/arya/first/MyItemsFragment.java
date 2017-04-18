@@ -10,16 +10,17 @@ import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
 
 public class MyItemsFragment extends Fragment {
     LayoutInflater inflater;
-    Goods[] goods;
+//    Goods[] goods;
+    ArrayList<Goods> goods;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -31,29 +32,32 @@ public class MyItemsFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_my_items, container, false);
         Button button = (Button)rootView.findViewById(R.id.button_add_item);
         this.inflater = inflater;
-
-        goods = new Goods[3];
-        for (int i = 0; i < goods.length; i++) {
-            goods[i] = new Goods();
-        }
+        goods = new ArrayList<>();
+//        goods = new Goods[3];
+//        for (int i = 0; i < goods.length; i++) {
+//            goods[i] = new Goods();
+//        }
         Date date = new Date(System.currentTimeMillis());
-        goods[0].setDate(date.getTime());
-        goods[0].setName("Tool");
-        goods[0].setPrice(152);
-        goods[1].setDate(date.getTime());
-        goods[1].setName("Cookie");
-        goods[1].setPrice(17);
-        goods[2].setDate(date.getTime());
-        goods[2].setName("Milk");
-        goods[2].setPrice(56);
+        goods.add(new Goods());
+        goods.get(0).setDate(date.getTime());
+        goods.get(0).setName("Tool");
+        goods.get(0).setPrice(152);
+        goods.add(new Goods());
+        goods.get(1).setDate(date.getTime());
+        goods.get(1).setName("Cookie");
+        goods.get(1).setPrice(17);
+        goods.add(new Goods());
+        goods.get(2).setDate(date.getTime());
+        goods.get(2).setName("Milk");
+        goods.get(2).setPrice(56);
 
 
         TableLayout tableLayout = (TableLayout)rootView.findViewById(R.id.table_my_goods);
-        for (int i = 0; i < goods.length; i++) {
+        for (int i = 0; i < goods.size(); i++) {
             tableLayout.addView(addRow(
-                    goods[i].getDate(),
-                    goods[i].getName(),
-                    goods[i].getPrice(),
+                    goods.get(i).getDate(),
+                    goods.get(i).getName(),
+                    goods.get(i).getPrice(),
                     i % 2 == 0 ? R.color.unevenRowBackground : R.color.evenRowBackground));
         }
         button.setOnClickListener(new View.OnClickListener() {
