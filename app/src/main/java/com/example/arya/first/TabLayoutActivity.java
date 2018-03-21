@@ -1,6 +1,7 @@
 package com.example.arya.first;
 
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -19,7 +20,7 @@ public class TabLayoutActivity extends AppCompatActivity {
 
         tabs = (TabLayout)findViewById(R.id.tabs);
         pager = (ViewPager)findViewById(R.id.pager);
-        adapter = new TabsPagerAdapter(getSupportFragmentManager());
+        adapter = new TabsPagerAdapter(getSupportFragmentManager(), getResources().getStringArray(R.array.tabs));
 
         pager.setAdapter(adapter);
         tabs.setupWithViewPager(pager);

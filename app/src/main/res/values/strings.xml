@@ -6,6 +6,7 @@
     <string name="add_item">Добавить</string>
     <string name="my_items">Мои товары</string>
     <string name="add">Добавить</string>
+    <string name="save">Сохранить</string>
 
     <string name="add_item_title">Добавить товар</string>
     <string name="goods">Товар</string>
@@ -20,9 +21,8 @@
 
     <string-array name="tabs">
         <item>История</item>
-        <item>Актуальные покупки</item>
-        <!--<item>Показания счётчиков</item>-->
+        <item>Покупки</item>
         <item>Друзья</item>
-        <item>Расчитать</item>
+        <item>Расчёт</item>
     </string-array>
 </resources>

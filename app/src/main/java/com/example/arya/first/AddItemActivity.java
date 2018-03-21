@@ -3,6 +3,7 @@ package com.example.arya.first;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -17,21 +18,11 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
-import java.util.concurrent.Exchanger;
-
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 
 public class AddItemActivity extends AppCompatActivity {
 
@@ -42,21 +33,13 @@ public class AddItemActivity extends AppCompatActivity {
     private Button addItemButton;
     private Date dateDate;
     private LinearLayout linearLayout;
-    private ArrayList<User> users, gsonUsers;
-    OkHttpClient client;
-    Exchanger<String> exchanger;
-    String stringResponseAdd = "";
-    String stringRequestUsers = "";
-    public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+    private ArrayList<User> users;
     Gson gson = (new GsonBuilder()).create();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_item);
-
-        client = new OkHttpClient();
-        exchanger = new Exchanger<>();
 
         textDate = (TextView)findViewById(R.id.text_date);
         textName = (TextView)findViewById(R.id.text_name);
@@ -69,6 +52,7 @@ public class AddItemActivity extends AppCompatActivity {
             textDate.setText(getIntent().getExtras().getString("date"));
             textName.setText(getIntent().getExtras().getString("name"));
             textPrice.setText(getIntent().getExtras().getString("price"));
+            addItemButton.setText(R.string.save);
         } else {
             dateDate = new Date(System.currentTimeMillis());
             textDate.setText(new SimpleDateFormat("dd.MM.yy", Locale.ROOT).format(dateDate));
@@ -80,26 +64,6 @@ public class AddItemActivity extends AppCompatActivity {
             }
         });
 
-//        Request requestUsers = new Request.Builder().url("http://192.168.43.52:9910").build();
-//        client.newCall(requestUsers).enqueue(new Callback() {
-//            @Override
-//            public void onFailure(Call call, IOException e) {
-//                e.printStackTrace();
-//            }
-//            @Override
-//            public void onResponse(Call call, Response response) throws IOException {
-//                if (!response.isSuccessful()) {
-//                    throw new IOException("Unexpected code " + response);
-//                } else {
-//                    try {
-//                        stringRequestUsers = exchanger.exchange(response.body().string());
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-//        });
-        gsonUsers = gson.fromJson(stringRequestUsers, ArrayList.class);
         users = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             users.add(new User());
@@ -110,7 +74,8 @@ public class AddItemActivity extends AppCompatActivity {
         for (int i = 0; i < users.size(); i++) {
             CheckBox checkBox = new CheckBox(this);
             checkBox.setText(users.get(i).getName());
-            checkBox.setLayoutParams(new ActionBar.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            checkBox.setLayoutParams(new ActionBar.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT));
             linearLayout.addView(checkBox);
         }
 
@@ -120,43 +85,26 @@ public class AddItemActivity extends AppCompatActivity {
                 Goods goods = new Goods();
                 goods.setName(String.valueOf(textName.getText()));
                 try {
-                    goods.setDate((new SimpleDateFormat("dd.MM.yy", Locale.ROOT).parse(String.valueOf(textDate.getText()))).getTime());
+                    goods.setDate((new SimpleDateFormat("dd.MM.yy", Locale.ROOT)
+                            .parse(String.valueOf(textDate.getText()))).getTime());
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
                 goods.setPrice(Float.parseFloat(String.valueOf(textPrice.getText())));
-                ArrayList<User> newusers = new ArrayList<User>();
+                ArrayList<User> checkedUsers = new ArrayList<>();
                 for (int i = 0; i < users.size(); i++) {
                     CheckBox checkBox = (CheckBox) linearLayout.getChildAt(i);
                     if (checkBox.isChecked()) {
-                        newusers.add(users.get(i));
+                        checkedUsers.add(users.get(i));
                     }
                 }
-
                 String stringGoods = gson.toJson(goods);
-                String stringUsers = gson.toJson(newusers);
-                String stringRequest = stringGoods + "/*/" + stringUsers;
+                String stringUsers = gson.toJson(checkedUsers);
 
-                RequestBody body = RequestBody.create(JSON, stringRequest);
-                Request requestAdd = new Request.Builder().url("http://192.168.43.52:9910").post(body).build();
-                client.newCall(requestAdd).enqueue(new Callback() {
-                    @Override
-                    public void onFailure(Call call, IOException e) {
-                        e.printStackTrace();
-                    }
-                    @Override
-                    public void onResponse(Call call, Response response) throws IOException {
-                        if (!response.isSuccessful()) {
-                            throw new IOException("Unexpected code " + response);
-                        } else {
-                            try {
-                                stringResponseAdd = exchanger.exchange(response.body().string());
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }
-                });
+                Intent intent = new Intent();
+                intent.putExtra("goods", stringGoods);
+                setResult(RESULT_OK, intent);
+                finish();
             }
         });
 
@@ -164,8 +112,8 @@ public class AddItemActivity extends AppCompatActivity {
 
     protected Dialog onCreateDialog(int id) {
         if (id == DIALOG_DATE) {
-            DatePickerDialog tpd = new DatePickerDialog(this, myCallBack, dateDate.getYear() + 1900, dateDate.getMonth(), dateDate.getDate());
-            return tpd;
+            return new DatePickerDialog(this, myCallBack,
+                    dateDate.getYear() + 1900, dateDate.getMonth(), dateDate.getDate());
         }
         return super.onCreateDialog(id);
     }

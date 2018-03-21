@@ -1,17 +1,17 @@
 package com.example.arya.first;
 
-import android.content.res.Resources;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.util.Log;
 
 public class TabsPagerAdapter extends FragmentStatePagerAdapter{
 
-    Fragment[] fragments = {new HistoryFragment(), new MyItemsFragment(), new MyFriendsFragment(), new CheckFragment()};
+    private Fragment[] fragments = {new HistoryFragment(), new MyItemsFragment(), new MyFriendsFragment(), new CheckFragment()};
+    private String[] titles;
 
-    public TabsPagerAdapter(FragmentManager fm) {
+    public TabsPagerAdapter(FragmentManager fm, String[] titles) {
         super(fm);
+        this.titles = titles;
     }
 
     @Override
@@ -21,11 +21,11 @@ public class TabsPagerAdapter extends FragmentStatePagerAdapter{
 
     @Override
     public int getCount() {
-        return 4;
+        return fragments.length;
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return "TAB" + (position+1);
+        return titles[position];
     }
 }

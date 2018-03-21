@@ -9,19 +9,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import java.util.ArrayList;
-import java.util.concurrent.Exchanger;
-
-import okhttp3.OkHttpClient;
 
 
 public class MyFriendsFragment extends Fragment {
 
-    Exchanger<String> exchanger;
-    String json = "";
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,31 +23,6 @@ public class MyFriendsFragment extends Fragment {
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_my_friends, container, false);
         LinearLayout linearLayout = (LinearLayout)rootView.findViewById(R.id.friends_list);
-
-        OkHttpClient client = new OkHttpClient();
-        exchanger = new Exchanger<>();
-//        Request request  = new Request.Builder().url("http://192.168.43.52:9910").build();
-//        client.newCall(request).enqueue(new Callback() {
-//            @Override
-//            public void onFailure(Call call, IOException e) {
-//                e.printStackTrace();
-//            }
-//            @Override
-//            public void onResponse(Call call, Response response) throws IOException {
-//                if (!response.isSuccessful()) {
-//                    throw new IOException("Unexpected code " + response);
-//                } else {
-//                    try {
-//                        json = exchanger.exchange(response.body().string());
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-//        });
-        GsonBuilder builder = new GsonBuilder();
-        Gson gson = builder.create();
-        ArrayList<User> gsonUsers = gson.fromJson(json, ArrayList.class);
 
         ArrayList<User> users = new ArrayList<>();
         User user1 = new User();
